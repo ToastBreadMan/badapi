@@ -2,42 +2,6 @@ from sqlalchemy import create_engine, Column, Integer, String, and_, delete
 import sqlite3
 
 from sqlalchemy.orm import declarative_base, sessionmaker
-""""
-conn = sqlite3.connect('test.db')
-engine = create_engine('sqlite:///test.db', echo=True)
-Base = declarative_base()
-
-session = sessionmaker(bind=engine)()
-
-
-class User(Base):
-    __tablename__  = 'users'
-    id = Column(Integer, primary_key=True)
-    nickname = Column(String)
-
-    def __init__(self, nickname):
-        self.nickname = nickname
-
-
-Base.metadata.create_all(engine)
-
-user = User("testname123")
-session.add(user)
-
-session.commit()
-
-test3 = User
-test = test3.nickname == "testname123"
-test2 = test3.id == 1
-
-
-def search(model, operation, *args):
-    print(args)
-    users = session.query(model).filter(operation(*args))
-    print(users[0].nickname)
-
-search(test3, and_, test)
-"""
 
 
 class SQLDatabaseControl:

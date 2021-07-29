@@ -7,8 +7,9 @@ from web.handler import Handler
 
 
 class Application:
-    def __init__(self):
+    def __init__(self, port=8000):
         self.url = []
+        self.port = port
         self.map = None
         self.functions = {}
         self.handler = Handler()
@@ -74,12 +75,10 @@ class Application:
         response = getattr(self.handler, f'handle_{mimetype}')(value, status)
         return response
 
+    def register(self, blueprint):
+        self.functions = {**self.functions, **blueprint.functions}
+        self.url = self.url + blueprint.url
+
     def run(self, app):
         self.map = Map(self.url)
-        run_simple('127.0.0.1', 5000, app, use_debugger=True, use_reloader=True)
-
-
-
-
-
-
+        run_simple('127.0.0.1', self.port, app, use_debugger=True, use_reloader=True)

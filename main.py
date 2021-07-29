@@ -1,11 +1,11 @@
+from second import blueprint
 from web.routing import Application
 
 app = Application()
-
-
+app.register(blueprint=blueprint)
 @app.html(path="/test")
 def test(request):
-    return "hello"
+    return "test"
 
 
 @app.html(path="/hello")
@@ -27,4 +27,5 @@ def redirect_test(request):
 def render_test(request):
     return ("index.html", {"test":"test"})
 
+print(app.functions)
 app.run(app)
