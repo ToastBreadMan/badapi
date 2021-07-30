@@ -2,7 +2,9 @@ from second import blueprint
 from web.routing import Application
 
 app = Application()
-app.register(blueprint=blueprint)
+app.register_blueprint(blueprint=blueprint)
+
+
 @app.html(path="/test")
 def test(request):
     return "test"
@@ -25,7 +27,11 @@ def redirect_test(request):
 
 @app.render(path="/render")
 def render_test(request):
-    return ("index.html", {"test":"test"})
+    return "index.html", {"test":"test"}
 
-print(app.functions)
+@app.json(path='/testfalsejson')
+def test_json(request):
+    return "Test123"
+
+
 app.run(app)
